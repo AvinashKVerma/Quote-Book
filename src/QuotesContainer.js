@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import QuoteForm from "./QuoteForm";
 import QuotesList from "./QuotesList";
+import AddQuote from "./AddQuote";
 
 const QuotesConatiner = () => {
   const [quotes, setQuotes] = useState([]);
@@ -25,7 +25,8 @@ const QuotesConatiner = () => {
   return (
     <div>
       <QuotesList quotes={quotes} del={del} />
-      <QuoteForm addData={addData} />
+      {/* <QuoteForm addData={addData} /> */}
+      <AddQuote addData={addData} />
     </div>
   );
 };
