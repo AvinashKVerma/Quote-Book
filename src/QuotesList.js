@@ -2,7 +2,7 @@ import React from "react";
 import QuotesItem from "./QuotesItem";
 
 const QuotesList = (props) => {
-  const { quotes, del } = props;
+  const { quotes, del, editData } = props;
   return (
     <div>
       {quotes.length ? (
@@ -17,6 +17,7 @@ const QuotesList = (props) => {
                     name={ele.name}
                     body={ele.body}
                     del={del}
+                    editData={editData}
                   />
                 </li>
               );

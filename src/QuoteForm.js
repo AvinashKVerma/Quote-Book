@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const QuoteForm = (props) => {
-  const { addData } = props;
-  const [name, setNames] = useState("");
-  const [body, setBody] = useState("");
+  const { id: slno, author, quote, formSubmission, handleToggle } = props;
+  const id = slno ? slno : uuidv4();
+  const [name, setNames] = useState(author ? author : "");
+  const [body, setBody] = useState(quote ? quote : "");
 
   const handleNameChange = (event) => {
     setNames(event.target.value);
@@ -18,18 +19,20 @@ const QuoteForm = (props) => {
     event.preventDefault();
 
     const formData = {
-      id: uuidv4(),
+      id: id,
       name: name,
       body: body,
     };
-    addData(formData);
+    formSubmission(formData);
+    if (handleToggle) {
+      handleToggle();
+    }
     setNames("");
     setBody("");
   };
 
   return (
     <div>
-      <h3>Add Quote</h3>
       <form onSubmit={handleSubmit}>
         <label htmlFor="author">Author</label>
         <br />

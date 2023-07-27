@@ -6,16 +6,27 @@ const QuotesConatiner = () => {
   const [quotes, setQuotes] = useState([]);
 
   useEffect(() => {
-    const result = JSON.parse(localStorage.getItem("quote")) || [];
+    const result = JSON.parse(localStorage.getItem("quotes")) || [];
     setQuotes(result);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("quote", JSON.stringify(quotes));
+    localStorage.setItem("quotes", JSON.stringify(quotes));
   }, [quotes]);
 
   const addData = (formdata) => {
     setQuotes([formdata, ...quotes]);
+  };
+
+  const editData = (formdata) => {
+    const result = quotes.map((q) => {
+      if (q.id === formdata.id) {
+        return { ...q, ...formdata };
+      } else {
+        return { ...q };
+      }
+    });
+    setQuotes(result);
   };
 
   const del = (dele) => {
@@ -24,7 +35,7 @@ const QuotesConatiner = () => {
   };
   return (
     <div>
-      <QuotesList quotes={quotes} del={del} />
+      <QuotesList quotes={quotes} del={del} editData={editData} />
       {/* <QuoteForm addData={addData} /> */}
       <AddQuote addData={addData} />
     </div>

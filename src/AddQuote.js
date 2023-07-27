@@ -1,10 +1,16 @@
 import React from "react";
 import QuoteForm from "./QuoteForm";
 
-const AddQuote = ({ addData }) => {
+const AddQuote = (props) => {
+  const { addData } = props;
+
+  const formSubmission = (formData) => {
+    addData(formData);
+  };
   return (
     <div>
-      <QuoteForm addData={addData} />
+      <h2>Add Quote</h2>
+      <QuoteForm formSubmission={formSubmission} />
     </div>
   );
 };
